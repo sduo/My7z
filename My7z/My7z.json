@@ -1,0 +1,6 @@
+{
+  "7z": "C:\\Program Files\\7-Zip\\7z.exe",
+  "provider": "sqlite", 
+  "algorithm": "sha256",
+  "remove": true
+}

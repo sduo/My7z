@@ -24,7 +24,12 @@ namespace My7z
         {
             Console.WriteLine();
 
-            Configuration = new ConfigurationBuilder().AddJsonFile($"{nameof(My7z)}.json", true).AddCommandLine(args).Build();
+            Configuration = new ConfigurationBuilder().AddJsonFile($"{nameof(My7z)}.json", true).AddCommandLine(args,new Dictionary<string, string>() {
+                { "-in","input" },
+                { "-out","output" },
+                { "-pwd","password" },
+                { "-alg","algorithm" }
+            }).Build();
 
             string input = Configuration.GetValue<string>(nameof(input));
             if (string.IsNullOrEmpty(input))
@@ -123,24 +128,7 @@ namespace My7z
                     }
                 }
                 break;
-            }
-
-            if (code == 0)
-            {
-                bool remove = Configuration.GetValue(nameof(remove), false);
-                if (remove)
-                {
-                    try
-                    {
-                        File.Delete(input);
-                        Console.WriteLine($"移除文件成功");
-                    }
-                    catch
-                    {
-                        Console.WriteLine($"移除文件失败");
-                    }
-                }
-            }
+            }            
 
             Environment.Exit(code);
         }        
